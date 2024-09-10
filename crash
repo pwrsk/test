@@ -1,1 +1,33 @@
 print("shared for URFAVNEG4 excluzively, have fun")
+local messages = {
+    "script made by pwrsk",
+    "knife reach by pwrsk",
+    "pwrsk's scripts on top",
+    "azure modded sucks",
+}
+
+local function message(message)
+    if game:GetService('TextChatService').ChatVersion == Enum.ChatVersion.LegacyChatService then
+        game:GetService('ReplicatedStorage'):WaitForChild('DefaultChatSystemChatEvents'):WaitForChild('SayMessageRequest'):FireServer(message, 'All')
+    else
+        game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(message)
+    end
+end
+
+-- Функция для выбора случайного сообщения из списка
+local function getRandomMessage()
+    local randomIndex = math.random(1, #messages)
+    return messages[randomIndex]
+end
+
+-- Функция для отправки случайного сообщения каждые 60 секунд
+local function sendRandomMessage()
+    while true do
+        local randomMessage = getRandomMessage()
+        message(randomMessage)
+        wait(120)
+    end
+end
+
+-- Запускаем функцию отправки сообщений
+sendRandomMessage()
